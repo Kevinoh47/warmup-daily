@@ -120,6 +120,18 @@ console.log('and also newStuff2: ', newStuff2.cars);
 state = {people: ['Odie', ...people, 'Garfield'], stuff: stuff};
 console.log('state object: ', JSON.stringify(state));
 
+newState = {newPeople:[], newStuff:stuff};
+console.log('newState object: ', JSON.stringify(newState));
+newState.newPeople = ['Odie', ...people, 'Garfield'];
+// newState.newStuff.cars = []; // oops this also resets stuff.cars -- passing by reference again.
+newState.newStuff.cars = stuff.cars.map(e=>e); 
+///newState.newStuff.cars.push('Chevy Bolt'); oops once again we are changing the other car arrays...
+console.log('newState object: ', JSON.stringify(newState));
+console.log({stuff});
+console.log('state object: ', JSON.stringify(state));
+
+
+
 
 
 
