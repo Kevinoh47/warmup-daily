@@ -1,8 +1,5 @@
 'use strict';
 
-// Turn us into ES6!!
-// require('babel-register');
-
 // arrays...
 let myArr = [1,2,3,4,5,6,7,8,9,10];
 
@@ -21,6 +18,22 @@ let whileLoop = arr => {
     counter++;
   }
 };
+
+console.log('_________________________\n\n');
+console.log('_________LOOPS___________\n\n');
+console.log('_________________________\n\n');
+console.log('_______forLoop0:_________\n\n');
+forLoop0(myArr);
+console.log('_______forLoop1:_________\n\n');
+forLoop1(myArr);
+console.log('_______whileLoop:________\n\n');
+whileLoop(myArr);
+
+
+
+console.log('_________________________\n\n');
+console.log('__________ARRAYS_________\n\n');
+console.log('_________________________\n\n');
 
 const doubleMe = num => num * 2;
 const evenNums = num => (num % 2 === 0) ? true: false;
@@ -57,22 +70,30 @@ let oddVals = filter(myArr, oddNums);
 let addReduced = reduce(myArr, addingCallback, 10);
 let addReduced2 = reduce(myArr, addingCallback);
 
-
 console.log({doubledVals});
+console.log('_________________________\n\n');
 console.log({evenVals});
+console.log('_________________________\n\n');
 console.log({oddVals});
+console.log('_________________________\n\n');
 console.log('reducer with starting value...', reduce([0, 1, 2, 3, 4], addingCallback, 10));
+console.log('_________________________\n\n');
 console.log('reducer without starting value...', reduce([0, 1, 2, 3, 4], addingCallback));
+console.log('_________________________\n\n');
 console.log({addReduced});
+console.log('_________________________\n\n');
 console.log({addReduced2});
 
-// whileLoop(myArr);
-// forLoop1(myArr);
-// forLoop0(myArr);
 
-// Objects
+
+console.log('_________________________\n\n');
+console.log('_________OBJECTS_________\n\n');
+console.log('_________________________\n\n');
 
 const people = ['Kookla','Fran','Ollie'];
+
+console.log({people});
+console.log('_________________________\n\n');
 
 const stuff = {
   tv: 'huge',
@@ -81,54 +102,49 @@ const stuff = {
   cars: ['Toyota','Mazda'],
 };
 
-let state = {};
-
-let newPeople = [];
-let newStuff = {}; // changed from a const to a let
-const constNewStuff = Object.assign({}, stuff);
-console.log('constNewStuff 1: ' , JSON.stringify(constNewStuff));
-let newState = {};
-
-newPeople = ['Odie', ...people, 'Garfield'];
-console.log({newPeople});
-console.log({people});
-
-newStuff = Object.assign({}, stuff); 
-let newStuff2 = Object.assign({cars:[...stuff.cars]}, stuff);
-newStuff.cars.push('Nissan');
-
-console.log('newStuff: ', JSON.stringify(newStuff));
-console.log('pushing onto newStuff.cars shows that the array was copied by reference. Here is stuff after we updated newStuff: ', JSON.stringify(stuff));
-console.log('and also constNewStuff 2: ' , JSON.stringify(constNewStuff));
-console.log('and newStuff2, which attempts to destructure cars array separately from the rest of the object assigment: ', JSON.stringify(newStuff2));
-
-stuff.cars.pop();
-console.log('popped stuff.cars... ', stuff.cars);
-console.log('newStuff.cars: ', newStuff.cars);
-console.log('constNewStuff.cars: ', constNewStuff.cars);
-console.log('newStuff2.cars: ', newStuff2.cars);
-
-newStuff.cars = [];
-newStuff.cars = [...stuff.cars]; //stuff.cars.map(e => e); //this also works...
-newStuff.cars.push('Tesla');
-
-console.log('newStuff.cars was reset to an empty array, then we used stuff.map to re-populate it, which worked, and then we also tried using destructured assignment for the array separate from the object, which also worked. Finally we pushed a new car pushed on... ', newStuff.cars);
-console.log('using map, or directly using destructuring assignment for the array, rather than  using the original array that came with the Object assign operation stops the copy by reference. Here is stuff: ', stuff.cars);
-console.log('and also constNewStuff: ', constNewStuff.cars);
-console.log('and also newStuff2: ', newStuff2.cars);
-
-state = {people: ['Odie', ...people, 'Garfield'], stuff: stuff};
-console.log('state object: ', JSON.stringify(state));
-
-newState = {newPeople:[], newStuff:stuff};
-console.log('newState object: ', JSON.stringify(newState));
-newState.newPeople = ['Odie', ...people, 'Garfield'];
-// newState.newStuff.cars = []; // oops this also resets stuff.cars -- passing by reference again.
-newState.newStuff.cars = stuff.cars.map(e=>e); 
-///newState.newStuff.cars.push('Chevy Bolt'); oops once again we are changing the other car arrays...
-console.log('newState object: ', JSON.stringify(newState));
 console.log({stuff});
-console.log('state object: ', JSON.stringify(state));
+console.log('_________________________\n\n');
+
+let newPeople = ['Odie', ...people, 'Garfield'];
+console.log({newPeople});
+console.log('_________________________\n\n');
+
+console.log('INSTRUCTIONS: Using spread and destructuring assignment, create a new object called newStuff, which is a copy of the stuff object, with a new car added to the end of the cars array within it.\n\n');
+
+const newStuff = {...stuff, cars: [...stuff.cars, 'Yugo']}; // changed from a const to a let
+console.log({newStuff});
+console.log('_________________________\n\n');
+
+console.log('Prove that stuff is unchanged:\n\n');
+console.log({stuff});
+console.log('_________________________\n\n');
+
+console.log('INSTRUCTIONS: Create a state object with keys of people and stuff that contain the people and stuff data. Do this using object destructuring assignment.\n\n');
+
+let state = {people, stuff};
+
+console.log({state});
+console.log('\n');
+console.log('state.stuff.cars: ', state.stuff.cars);
+console.log('_________________________\n\n');
+
+console.log('INSTRUCTIONS: Using spread and destructuring assignments, create a new object called newState, repeating the newPeople and newStuff steps above but directly within the people and stuff nodes of the state object (do not just spread in newPeople and newStuff).\n\n');
+
+let newState = {...state, people: ['Odie', ...people, 'Garfield'], stuff: {...stuff, cars: [...stuff.cars, 'Tesla']}};
+console.log({newState});
+console.log('\n');
+console.log('newState.stuff.cars: ', newState.stuff.cars);
+console.log('_________________________\n\n');
+
+console.log('INSTRUCTIONS: Prove that the original people, stuff, and state are unchanged.\n\n');
+console.log({people});
+console.log('_________________________\n\n');
+console.log({stuff});
+console.log('_________________________\n\n');
+console.log({state});
+console.log('\n');
+console.log('state.stuff.cars: ', state.stuff.cars);
+console.log('_________________________\n\n');
 
 
 
