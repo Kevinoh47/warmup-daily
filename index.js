@@ -1,4 +1,85 @@
 'use strict';
+// 12-19-2018
+
+
+console.log('__________12/19__________\n\n');
+
+let myArr1219 = [];
+
+for (var i = 0; i < 10; i++) {
+  myArr1219.push(i+1);
+}
+console.log({myArr1219});
+
+console.log('__while loop function__\n\n');
+
+
+const whileLoop1219 = arr => {
+  let counter = 0;
+  while(counter <= 10) {
+    console.log(arr[counter]);
+    counter++;
+  }
+};
+whileLoop1219(myArr1219);
+
+console.log('__map function__\n\n');
+
+const map1219 = (arr, myFunc) => {
+  let output = [];
+  arr.forEach(e => {output.push(myFunc(e));})
+  return output;
+};
+
+const tripleIt = num => num * 3;
+
+let tripledArr = map1219(myArr1219, tripleIt);
+
+console.log({tripledArr});
+
+console.log('___filter function__\n\n');
+
+const filter1219 = (arr, myFilter) => {
+  let result = [];
+  arr.forEach(e => {
+    if (myFilter(e)) {
+      result.push(e);
+    }
+  })
+  return result;
+}
+const divisibleBy = (num, divBy) => {
+  return (num % divBy === 0) ? true:false;
+};
+const divBy3 = (num) => {return divisibleBy(num, 3);};
+const divBy4 = (num) => {return divisibleBy(num, 4);};
+
+const myArrValsDivisibleBy3 = filter1219(myArr1219, divBy3);
+const myArrValsDivisibleBy4 = filter1219(myArr1219, divBy4);
+
+console.log({myArrValsDivisibleBy3});
+console.log({myArrValsDivisibleBy4});
+
+console.log('___reduce function__\n\n');
+
+const reducer1219 = (arr, myFunc, accumulator = 0) => {
+  arr.forEach( e => {
+    accumulator = accumulator + myFunc(e, accumulator);
+    console.log(e, accumulator);
+  })
+  return accumulator;
+}
+const multiplier = (num1, num2) => {return num1 * num2;};
+const doubler = num => {return multiplier(num , 2);}
+const testDoubler = doubler(15);
+console.log({testDoubler});
+const doubledAndSummedArrValsFrom0 = reducer1219(myArr1219, doubler);
+console.log({doubledAndSummedArrValsFrom0});
+
+const doubledAndSummedArrValsFrom1 = reducer1219(myArr1219, doubler, 1);
+console.log({doubledAndSummedArrValsFrom1});
+
+console.log('__________12/16__________\n\n');
 
 // arrays...
 let myArr = [1,2,3,4,5,6,7,8,9,10];
@@ -21,7 +102,6 @@ let whileLoop = arr => {
 
 console.log('_________________________\n\n');
 console.log('_________LOOPS___________\n\n');
-console.log('_________________________\n\n');
 console.log('_______forLoop0:_________\n\n');
 forLoop0(myArr);
 console.log('_______forLoop1:_________\n\n');
