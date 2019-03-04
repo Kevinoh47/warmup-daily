@@ -1,14 +1,46 @@
 'use strict';
+
+
+let myArr = [1,2,3,4,5,6,7,8,9,10];
+
+// from https://github.com/codefellows-seattle-javascript-401n7/class/blob/master/reference/WHITEBOARD-PRACTICE.md 
+// FUNCTIONAL PROGRAMMING 5. create a function called find that takes an array and a callback and uses reduce to return the first item in the array that the callback returns true
+
+// curried callbacks
+function divisibleBy(divisor) {
+  return function(num) {
+    return (num % divisor === 0);
+  }
+}
+let divisibleBy7 = divisibleBy(7);
+let divisibleBy5 = divisibleBy(5);
+let divisibleBy13 = divisibleBy(13);
+
+let find = (arr, cb) => {
+  let output = [];
+  arr.reduce( (reducer, curr) => {
+    if (cb(curr)) { 
+      reducer = curr;
+      output.push(reducer);
+    }
+  }, 0);
+  return (output.length) ? output[0] : false;
+}
+console.log({'14 is divisble by 7?': divisibleBy7(14)});
+console.log({'15 is divisble by 7?': divisibleBy7(15)});
+
+console.log('\n --- \n');
+console.log({'first value divisible by 7 using the find function?': find(myArr, divisibleBy7)});
+console.log({'first value divisible by 5 using the find function?': find(myArr, divisibleBy5)});
+console.log({'any values divisible by 13 using the find function?': find(myArr, divisibleBy13)});
+console.log('\n --- \n');
 /**
  * ARRAYS
  *  Create an array of numbers, 1 through 10
  *  Write a function, called forLoop that takes an array as a parameter, runs the array through a for(...) loop and does a console.log() of each element.
  *  Write a function, called whileLoop that takes an array as a parameter, runs the array through a while(...) loop and does a console.log() of each element.
  *  Implement .map(), .filter(), .reduce() as regular javascript functions that take in an array as a parameter, but do the same things as the real functions.
-
  */
-
-let myArr = [1,2,3,4,5,6,7,8,9,10];
 
 function AddReducer (arr) {
   let total = 0;
